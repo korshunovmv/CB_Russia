@@ -1,0 +1,46 @@
+
+<div class="wrapper-matrix">
+  <div class="matrix" *ngIf="matrix">
+    <div *ngFor="let row of matrix; let x = index" class="row">
+      <div *ngFor="let cell of row; let y = index" class="cell" (click)="changeValueMatrix(x, y)" [style.background-color]="cell?.domain?.color">
+        {{cell.value}}
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <button mat-raised-button (click)="openDialogCreateMatrix()">
+      <span *ngIf="!matrix">Создать массив</span>
+      <span *ngIf="matrix">Изменить массив</span>
+    </button>
+    <button mat-raised-button *ngIf="matrix" (click)="openDialogSetChance()">АВТО</button>
+    <button mat-raised-button *ngIf="matrix" (click)="calcDomainsAndAddInResult()">Посчитать домены и добавить в результаты</button>
+    <button mat-raised-button *ngIf="matrix" (click)="addInResult()">Добавить в результаты</button>
+  </div>
+</div>
+<div class="count-domains" *ngIf="matrix">
+  <span>Количество доменов:</span><span class="count-domains-value">{{countDomains}}</span>
+</div>
+<div class="table-result">
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="chance">
+        <mat-header-cell *matHeaderCellDef> Вероятность </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.chance}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="countDomains">
+        <mat-header-cell *matHeaderCellDef> Количество доменов в матрице </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.countDomains}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="matrixLength">
+        <mat-header-cell *matHeaderCellDef> Количество ячеек в матрице (N*M) </mat-header-cell>
+        <mat-cell *matCellDef="let element"> ({{element.matrixLength.n}}*{{element.matrixLength.m}}) </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</div>

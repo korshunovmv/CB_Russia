@@ -1,0 +1,10 @@
+.mat-dialog-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mat-dialog-actions{
+  display: flex;
+  justify-content: flex-end;
+}

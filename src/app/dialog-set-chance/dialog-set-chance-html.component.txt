@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>
+  <span>Укажите вероятность использования единицы</span>
+  <button mat-icon-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="form-controls">
+      <mat-form-field
+        [hideRequiredMarker]="options.value.hideRequired"
+        [floatLabel]="options.value.floatLabel">
+        <input matInput placeholder="Вероятность" [formControl]="form?.controls?.chance" required>
+        <mat-error *ngIf="form?.controls?.chance.invalid">{{getErrorMessageChance()}}</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="chance" [disabled]="!form.valid">Создать</button>
+</div>

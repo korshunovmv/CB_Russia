@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>
+  <span>Укажите размеры матрицы</span>
+  <button mat-icon-button (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="form-controls">
+      <mat-form-field
+        [hideRequiredMarker]="options.value.hideRequired"
+        [floatLabel]="options.value.floatLabel">
+        <input matInput placeholder="N" [formControl]="form?.controls?.n" required>
+        <mat-error *ngIf="form?.controls?.n.invalid">{{getErrorMessageN()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field
+        [hideRequiredMarker]="options.value.hideRequired"
+        [floatLabel]="options.value.floatLabel">
+        <input matInput placeholder="M" [formControl]="form?.controls?.m" required>
+        <mat-error *ngIf="form?.controls?.m.invalid">{{getErrorMessageM()}}</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="matrixLength" [disabled]="!form.valid">Создать</button>
+</div>
